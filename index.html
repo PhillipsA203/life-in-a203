@@ -18,23 +18,27 @@
   body{
     background:var(--paper);
     background-image:
+      radial-gradient(ellipse 60% 42% at 50% -6%, rgba(181,67,31,.12), transparent 60%),
       repeating-radial-gradient(circle at -6% -10%, rgba(28,23,20,.05) 0 1px, transparent 1px 13px),
       repeating-radial-gradient(circle at 106% 112%, rgba(28,23,20,.045) 0 1px, transparent 1px 15px),
       radial-gradient(circle at 14% 16%, rgba(181,67,31,.07), transparent 44%),
       radial-gradient(circle at 86% 6%, rgba(59,93,82,.08), transparent 42%),
-      linear-gradient(rgba(28,23,20,.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(28,23,20,.04) 1px, transparent 1px);
-    background-size:auto,auto,auto,auto,36px 36px,36px 36px;
+      linear-gradient(rgba(28,23,20,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(28,23,20,.035) 1px, transparent 1px);
+    background-size:auto,auto,auto,auto,auto,36px 36px,36px 36px;
     background-attachment:fixed;
     color:var(--ink);font-family:"Hanken Grotesque",sans-serif;line-height:1.5;
     min-height:100vh;-webkit-font-smoothing:antialiased;
   }
+  /* Shark-tank backdrop: faint water line + fins behind everything */
+  .tank{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
   /* Header */
   header{text-align:center;padding:46px 24px 8px;position:relative}
   .kicker{font-size:.78rem;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);font-weight:700}
   h1{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(2.3rem,6vw,4.2rem);line-height:.98;letter-spacing:-.02em;margin-top:8px}
-  .sub{margin-top:12px;color:var(--ink-soft);font-size:1.05rem}
+  .sub{margin-top:10px;color:var(--ink-soft);font-size:1.05rem}
   .sub b{color:var(--ink)}
+  .namebar{font-size:.82rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-top:10px}
 
   /* Scene */
   .scene{max-width:1080px;margin:30px auto 10px;padding:0 22px 40px;
@@ -108,9 +112,24 @@
 </style>
 </head>
 <body>
+<svg class="tank" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- water ripples -->
+  <g fill="none" stroke="#3b5d52" stroke-width="3" opacity="0.12">
+    <path d="M-20 812 q 120 -26 240 0 t 240 0 t 240 0 t 240 0 t 240 0 t 240 0 t 240 0"/>
+    <path d="M-20 840 q 120 -22 240 0 t 240 0 t 240 0 t 240 0 t 240 0 t 240 0 t 240 0" opacity="0.7"/>
+    <path d="M-20 868 q 120 -18 240 0 t 240 0 t 240 0 t 240 0 t 240 0 t 240 0 t 240 0" opacity="0.5"/>
+  </g>
+  <!-- shark fins breaking the surface -->
+  <g fill="#1c1714" opacity="0.06">
+    <path d="M300 816 C 322 758 366 722 398 710 C 376 752 388 802 438 816 Z"/>
+    <path d="M980 816 C 1006 742 1056 698 1098 684 C 1070 736 1086 800 1146 816 Z"/>
+  </g>
+  <path d="M650 818 C 666 776 696 750 720 742 C 704 774 716 806 748 818 Z" fill="#b5431f" opacity="0.05"/>
+</svg>
+
 <header>
-  <div class="kicker">Room A203</div>
-  <h1>Mr. Phillips' Business Class</h1>
+  <h1>Life in A203</h1>
+  <div class="namebar">Mr. Phillips · Business</div>
   <p class="sub">Welcome in. Pick a spot in the room to get started.</p>
 </header>
 
@@ -154,17 +173,28 @@
   <button class="tile museum" data-action="museum" aria-label="Museum, coming soon">
     <span class="badge">Coming soon</span>
     <div class="art">
-      <svg viewBox="0 0 230 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-        <!-- pedestal -->
-        <rect x="78" y="120" width="74" height="34" rx="3" fill="#9a6a39"/>
-        <rect x="72" y="148" width="86" height="10" rx="3" fill="#7a5025"/>
-        <!-- glass case -->
-        <rect x="74" y="40" width="82" height="84" rx="4" fill="#3b5d52" opacity=".12" stroke="#3b5d52" stroke-width="2.5"/>
-        <line x1="115" y1="40" x2="115" y2="124" stroke="#3b5d52" stroke-width="1.4" opacity=".5"/>
-        <!-- artifact: little amphora -->
-        <path d="M104 110 q-9 -2 -9 -20 q0 -18 14 -22 q14 4 14 22 q0 18 -9 20 z" fill="#b5431f"/>
-        <rect x="106" y="60 " width="14" height="6" rx="3" fill="#8a3216"/>
-        <path d="M104 70 q-8 4 -6 14 M122 70 q8 4 6 14" stroke="#8a3216" stroke-width="2.4" fill="none"/>
+      <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <!-- back legs -->
+        <g stroke="#7a5025" stroke-width="6" stroke-linecap="round">
+          <path d="M66 100 L74 138"/><path d="M134 100 L126 138"/>
+        </g>
+        <!-- front legs -->
+        <g stroke="#9a6a39" stroke-width="7" stroke-linecap="round">
+          <path d="M48 104 L44 150"/><path d="M152 104 L156 150"/>
+        </g>
+        <!-- shadow-box body (wood frame of the display top) -->
+        <rect x="40" y="92" width="120" height="22" rx="3" fill="#9a6a39"/>
+        <rect x="40" y="108" width="120" height="7" rx="3" fill="#7a5025"/>
+        <!-- glass display top -->
+        <polygon points="52,72 148,72 160,94 40,94" fill="#3b5d52" opacity="0.16"/>
+        <polygon points="52,72 148,72 160,94 40,94" fill="none" stroke="#3b5d52" stroke-width="2.5" opacity="0.55"/>
+        <!-- artifacts under glass: a little record + a framed piece -->
+        <circle cx="82" cy="86" r="8" fill="#b5431f"/>
+        <circle cx="82" cy="86" r="2.5" fill="#fbf6ee"/>
+        <rect x="106" y="78" width="15" height="14" rx="2" fill="#c98a2f"/>
+        <path d="M109.5 78 l4 -7 l4 7 Z" fill="#c98a2f"/>
+        <!-- glass highlight -->
+        <path d="M62 90 L96 74" stroke="#fff" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
       </svg>
     </div>
     <div class="ground"></div>
@@ -198,17 +228,24 @@
   <button class="tile schoolwork" data-action="schoolwork" aria-label="Schoolwork, choose your class">
     <div class="art">
       <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-        <!-- tray -->
-        <rect x="40" y="120" width="120" height="22" rx="4" fill="#7a5025"/>
-        <path d="M40 120 L52 104 L148 104 L160 120 Z" fill="#9a6a39"/>
-        <!-- folder + papers -->
-        <rect x="64" y="50" width="76" height="58" rx="4" fill="#fff" stroke="#1c1714" stroke-width="3"/>
-        <rect x="70" y="44" width="64" height="50" rx="4" fill="#c98a2f"/>
-        <rect x="70" y="44" width="30" height="9" rx="4" fill="#c98a2f"/>
-        <rect x="78" y="60" width="48" height="5" rx="2.5" fill="#fff" opacity=".85"/>
-        <rect x="78" y="71" width="40" height="5" rx="2.5" fill="#fff" opacity=".85"/>
-        <circle cx="120" cy="83" r="9" fill="#b5431f"/>
-        <path d="M116 83 l3 3 l5 -6" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- screen -->
+        <rect x="50" y="30" width="100" height="70" rx="5" fill="#1c1714"/>
+        <rect x="57" y="37" width="86" height="56" rx="2" fill="#fbf6ee"/>
+        <rect x="64" y="44" width="46" height="8" rx="3" fill="#b5431f"/>
+        <rect x="64" y="58" width="72" height="5" rx="2.5" fill="#d8cbb6"/>
+        <rect x="64" y="68" width="72" height="5" rx="2.5" fill="#d8cbb6"/>
+        <rect x="64" y="78" width="50" height="5" rx="2.5" fill="#d8cbb6"/>
+        <circle cx="129" cy="80" r="9" fill="#3b5d52"/>
+        <path d="M125 80 l3 3 l6 -7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- boxy base -->
+        <path d="M34 104 L166 104 L178 124 L22 124 Z" fill="#c9b48f"/>
+        <rect x="22" y="123" width="156" height="13" rx="3" fill="#a98f63"/>
+        <!-- trackpad + keys -->
+        <rect x="84" y="110" width="32" height="7" rx="2" fill="#8a7456"/>
+        <g fill="#8a7456">
+          <rect x="44" y="109" width="10" height="4" rx="1"/><rect x="58" y="109" width="10" height="4" rx="1"/><rect x="72" y="109" width="10" height="4" rx="1"/>
+          <rect x="118" y="109" width="10" height="4" rx="1"/><rect x="132" y="109" width="10" height="4" rx="1"/><rect x="146" y="109" width="10" height="4" rx="1"/>
+        </g>
       </svg>
     </div>
     <div class="ground"></div>
@@ -255,14 +292,14 @@ const CONFIG = {
   stacksUrl: "https://phillipsa203.github.io/Record-Catalog/",   // The Stacks catalog (live)
   museumUrl: "",                                                  // leave "" = Coming soon
 
-  classes: ["Sports Marketing", "Intro to Business", "International Business", "AP Business"],
+  // Classes shown this semester. In January, add "Sports Marketing" and
+  // "International Business" back into this list (and their links below).
+  classes: ["Intro to Business", "AP Business"],
 
   // Google Slides agenda link for each class:
   agenda: {
-    "Sports Marketing":      "",
-    "Intro to Business":     "",
-    "International Business": "",
-    "AP Business":           ""
+    "Intro to Business":     "https://docs.google.com/presentation/d/1rG11w1OYNs8Z9noop7zBXJ1g3PtAcKWJ2zplbQlKQcE/present",
+    "AP Business":           "https://docs.google.com/presentation/d/1r6aWQdxOAzIRmQ1jGaFtyaj3lXIAind9gjXtxzJ_Z4A/present"
   },
 
   // Schoolwork / assignments link for each class:
